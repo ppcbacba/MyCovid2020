@@ -2,10 +2,13 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Covid.Server.Data;
+using Covid.Server.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -25,7 +28,16 @@ namespace Covid.Server
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddDbContext<MyDbContext>(options =>
+            {
+                options.UseSqlite("Data Source=covid.db");
+            });
             services.AddControllers();
+            services.AddScoped<IEmployeeRepository,EmployeeRepository>();
+            services.AddCors(optios =>
+            {
+                optios.AddPolicy("Open", builder => builder.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod());
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -35,6 +47,7 @@ namespace Covid.Server
             {
                 app.UseDeveloperExceptionPage();
             }
+            app.UseCors("Open");
 
             app.UseHttpsRedirection();
 

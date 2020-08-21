@@ -1,20 +1,25 @@
-﻿using System;
+﻿using Covid.Shared.Dtos;
+using Microsoft.AspNetCore.Components;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Components;
-using Covid.Shared.Dtos;
 
 namespace Covid.Client.Pages
 {
-    public class EmployeeOverviewBase:ComponentBase
+    public class EmployeeDetailBase:ComponentBase
     {
-        public IEnumerable<EmployeeDto> Employees { get; set; }
+        [Parameter]
+        public string Id { get; set; }
+        public EmployeeDto Employee { get; set; }
 
-      protected override async Task OnInitializedAsync()
+        public IEnumerable<EmployeeDto> Employees { get; set; } = new List<EmployeeDto>();
+
+
+        protected override async Task OnInitializedAsync()
         {
-            Employees = 
-                new List<EmployeeDto> { 
+            Employees =
+                new List<EmployeeDto> {
             new EmployeeDto
             {
                 Id=1,
@@ -40,7 +45,9 @@ namespace Covid.Client.Pages
                 Gender=Gender.Male
             }
             };
+            Employee = Employees.FirstOrDefault(x=>x.Id==int.Parse(Id));
             await base.OnInitializedAsync();
         }
+
     }
 }

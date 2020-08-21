@@ -1,0 +1,10 @@
+﻿@page "/EmployeeDetail/{Id}"
+@inherits EmployeeDetailBase
+<h3>EmployeeDetail for @Employee.Name</h3>
+
+<ul>
+    <li>@Employee.DepartmentId</li>
+    <li>@Employee.BirthDate</li>
+    <li>@Employee.Gender</li>
+</ul>
+<a href="/employees">返回</a>
