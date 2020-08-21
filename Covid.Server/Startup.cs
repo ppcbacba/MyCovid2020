@@ -34,9 +34,9 @@ namespace Covid.Server
             });
             services.AddControllers();
             services.AddScoped<IEmployeeRepository,EmployeeRepository>();
-            services.AddCors(optios =>
+            services.AddCors(options =>
             {
-                optios.AddPolicy("Open", builder => builder.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod());
+                options.AddPolicy("Open", builder => builder.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod());
             });
         }
 
@@ -49,7 +49,7 @@ namespace Covid.Server
             }
             app.UseCors("Open");
 
-            app.UseHttpsRedirection();
+            // app.UseHttpsRedirection();
 
             app.UseRouting();
 

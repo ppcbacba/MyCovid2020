@@ -2,6 +2,8 @@
   "profiles": {
     "Covid.Server": {
       "commandName": "Project",
+      "launchBrowser": true,
+      "launchUrl": "api/department/1/employee",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
       },

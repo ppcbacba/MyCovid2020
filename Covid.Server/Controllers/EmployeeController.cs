@@ -21,7 +21,7 @@ namespace Covid.Server.Controllers
         }
 
         [HttpGet]
-        public async Task<ActionResult<IList<EmployeeDto>>> GetAllForDepartment
+        public async Task<ActionResult<EmployeeDto[]>> GetAllForDepartment
             (int departmentId)
         {
             var employees = await _employeeRepository
@@ -35,7 +35,7 @@ namespace Covid.Server.Controllers
                 Gender = x.Gender,
                 No = x.No,
                 PictureUrl = x.PictureUrl
-            }).ToList();
+            }).ToArray();
             return dtos;
         }
 
