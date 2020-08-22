@@ -8,8 +8,31 @@
     <li class="list-group-item">部门号：@Employee.DepartmentId</li>
     <li class="list-group-item">姓名：@Employee.Name</li>
     <li class="list-group-item">出生年月：@Employee.BirthDate.Date.ToShortDateString()</li>
-    <li class="list-group-item">性别：@Employee.Gender</li> 
+    <li class="list-group-item">性别：@Employee.Gender</li>
 </ul>
+<h3>失焦更新的绑定</h3>
+<form>
+    <div class="form-group row">
+        <label class="col-form-label">姓名</label>
+        <input class="form-control" @bind="@Employee.Name" />
+    </div>
+    <div class="form-group row">
+        <label class="col-form-label">出生日期</label>
+        <input class="form-control" @bind="@Employee.BirthDate" type="date" />
+    </div>
+</form>
+<h3>即时更新的绑定</h3>
+<form>
+    <div class="form-group row">
+        <label class="col-form-label">姓名</label>
+        <input class="form-control" @bind="@Employee.Name" @bind:event="oninput" />
+    </div>
+    <div class="form-group row">
+        <label class="col-form-label">出生日期</label>
+        <input class="form-control" @bind="@Employee.BirthDate" type="date" @bind:event="oninput" />
+    </div>
+    <button onclick="ClickButton">点击</button>
+</form>
 <a href="employees" class="btn btn-primary">返回</a>
 @code {
     [Inject] public HttpClient Client { get; set; }
@@ -17,16 +40,21 @@
     [Parameter]
     public string EmployeeId { get; set; }
     // public EmployeeService EmployeeService { get; set; }
-    public EmployeeDto Employee { get; set; }=new EmployeeDto();
-    public IEnumerable<EmployeeDto> Employees { get; set; }=new List<EmployeeDto>();
+    public EmployeeDto Employee { get; set; } = new EmployeeDto();
+    public IEnumerable<EmployeeDto> Employees { get; set; } = new List<EmployeeDto>();
 
-        protected override async Task OnInitializedAsync()
-        {
-            Employees = await Client.GetFromJsonAsync<IList<EmployeeDto>>("api/department/1/employee");
-            Employee = Employees.FirstOrDefault(x => x.Id == int.Parse(EmployeeId));
-            // Employee = await EmployeeService.GetOneById(int.Parse(EmployeeId));
-            await base.OnInitializedAsync();
-        }
+    protected override async Task OnInitializedAsync()
+    {
+        Employees = await Client.GetFromJsonAsync<IList<EmployeeDto>>("api/department/1/employee");
+        Employee = Employees.FirstOrDefault(x => x.Id == int.Parse(EmployeeId));
+        // Employee = await EmployeeService.GetOneById(int.Parse(EmployeeId));
+        await base.OnInitializedAsync();
+    }
+
+    public void ClickButton()
+    {
+        Employee.Name = "Zhang san";
+    }
 
 }
 
