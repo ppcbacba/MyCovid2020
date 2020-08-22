@@ -1,43 +1,58 @@
 ﻿@page "/employees"
 @using Covid.Shared.Dtos
+@using Covid.Client.Services
+@using System.Net
+@using System.ComponentModel.Design
+
 <h3>EmployeeOverview</h3>
 <table class="table table-striped">
     <thead class="thead-dark">
-    <tr >
-        <th>编号</th>
-        <th>部门</th>
-        <th>姓名</th>
-        <th>性别</th>
-        <th>出生日期</th>
-        <th>操作</th>
-    </tr>
-    </thead>
-    @foreach (var item in Employees)
-    {
         <tr>
-            <td>@item.Id</td>
-            <td>@item.DepartmentId</td>
-            <td>@item.Name</td>
-            <td>@item.Gender</td>
-            <td>@item.BirthDate</td>
-            <td>
-                <a href="employeedetail/@item.Id" >细节</a>
-            </td>
+            <th>编号</th>
+            <th>部门</th>
+            <th>姓名</th>
+            <th>性别</th>
+            <th>出生日期</th>
+            <th>操作</th>
         </tr>
+    </thead>
+    @if (Employees.ToList().Count<=1)
+    {
+        Console.WriteLine("employee is null");
+        }
+    else
+    {
+        @foreach (var item in Employees)
+        {
+            <tr>
+                <td>@item.Id</td>
+                <td>@item.DepartmentId</td>
+                <td>@item.Name</td>
+                <td>@item.Gender</td>
+                <td>@item.BirthDate.ToShortDateString()</td>
+                <td>
+                    <a href="employeedetail/@item.Id">细节</a>
+                </td>
+            </tr>
+        }
+
+
     }
 </table>
 
 
 @code {
 
-    [Inject] private HttpClient client { get; set; }
-    public EmployeeDto employee { get; set; }
+    [Inject] private HttpClient client { get; set; } 
+    // public EmployeeDto employee { get; set; }
     public IEnumerable<EmployeeDto> Employees { get; set; }=new List<EmployeeDto>();
-
+    // public EmployeeService EmployeeService { get; set; }
     
     protected override async Task OnInitializedAsync()
     {
         Employees = await client.GetFromJsonAsync<IList<EmployeeDto>>("api/department/1/employee");
+        // Employees =await EmployeeService.GetAllFromDepartment(1);
+        
 
         await base.OnInitializedAsync();
     }
