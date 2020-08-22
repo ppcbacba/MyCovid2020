@@ -30,8 +30,8 @@
                 <td>@item.Name</td>
                 <td>@item.Gender</td>
                 <td>@item.BirthDate.ToShortDateString()</td>
-                <td>
-                    <a href="employeedetail/@item.Id">细节</a>
+                <td class="row">
+                    <a href="employeeedit/@item.Id">编辑</a> <a href="employeedetail/@item.Id">细节</a>
                 </td>
             </tr>
         }

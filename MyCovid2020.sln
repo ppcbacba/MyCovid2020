@@ -7,7 +7,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Covid.Server", "Covid.Serve
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Covid.Shared", "Covid.Shared\Covid.Shared.csproj", "{B90560A4-86C2-41A9-A569-9F499455C7CB}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Covid.Client", "Covid.Client\Covid.Client.csproj", "{727A0E42-0634-4EE6-A617-D8B958EBA09B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Covid.Client", "Covid.Client\Covid.Client.csproj", "{727A0E42-0634-4EE6-A617-D8B958EBA09B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
