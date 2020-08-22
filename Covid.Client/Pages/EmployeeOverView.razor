@@ -21,7 +21,7 @@
             <td>@item.Gender</td>
             <td>@item.BirthDate</td>
             <td>
-                <a href="EmployeeDetail" >细节</a>
+                <a href="employeedetail/@item.Id" >细节</a>
             </td>
         </tr>
     }
@@ -29,7 +29,9 @@
 
 
 @code {
+
     [Inject] private HttpClient client { get; set; }
+    public EmployeeDto employee { get; set; }
     public IEnumerable<EmployeeDto> Employees { get; set; }=new List<EmployeeDto>();
 
     
