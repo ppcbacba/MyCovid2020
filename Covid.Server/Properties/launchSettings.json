@@ -3,7 +3,7 @@
     "Covid.Server": {
       "commandName": "Project",
       "launchBrowser": true,
-      
+      "launchUrl": "api/department",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
       },

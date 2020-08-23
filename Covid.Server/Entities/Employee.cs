@@ -29,5 +29,7 @@ namespace Covid.Server.Entities
 
         [Display(Name = "性别")]
         public Gender Gender { get; set; }
+
+        // public virtual Department Department { get; set; }
     }
 }

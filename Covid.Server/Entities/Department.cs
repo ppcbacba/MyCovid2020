@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 namespace Covid.Server.Entities
 {
@@ -10,5 +11,7 @@ namespace Covid.Server.Entities
         [Required(ErrorMessage = "{0}是必填项")]
         [MaxLength(50, ErrorMessage = "{0}的长度不能超过{1}")]
         public string Name { get; set; }
+
+        // public virtual IEnumerable<Employee> Employees { get; set; }
     }
 }

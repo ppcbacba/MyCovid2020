@@ -69,5 +69,16 @@ namespace Covid.Server.Services
                 throw new Exception("删除失败");
             }
         }
+
+        /*public async  Task<Department> GetDepartment(int employeeId)
+        {
+            var employee =await  _myContext.Employees.FirstOrDefaultAsync(x => x.Id == employeeId);
+            if (employee == null)
+            {
+                throw new Exception("找不到这个员工");
+            }
+
+            return employee.Department;
+        }*/
     }
 }

@@ -1,10 +1,10 @@
-﻿@page "/employeeedit/{employeeId}"
-@page "/employeeedit"
+﻿@page "/employeeedit/{departmentId}"
+@page "/employeeedit/{departmentId}/{employeeId}"
 @using Covid.Shared.Dtos
 <h3>Employee Edit</h3>
 
 <EditForm Model="@Employee">
-    <DataAnnotationsValidator />
+    <DataAnnotationsValidator/>
     <ValidationSummary/>
 
     <div class="form-group row">
@@ -15,7 +15,7 @@
     </div>
 
     <div class="form-group row">
-         <label class="col-sm-2 col-form-label">姓名</label>
+        <label class="col-sm-2 col-form-label">姓名</label>
         <div class="col-sm-10 ">
             <InputText class="form-control"id="name" @bind-Value="Employee.Name"/>
         </div>
@@ -23,7 +23,7 @@
     <div class="form-group row">
         <label class="col-sm-2 col-form-label">出生日期</label>
         <div class="col-sm-10 ">
-            <InputDate for="birthDate" id="birthDate" class="form-control" @bind-Value="Employee.BirthDate" />
+            <InputDate for="birthDate" id="birthDate" class="form-control" @bind-Value="Employee.BirthDate"/>
         </div>
     </div>
     <div class="form-group row">
@@ -37,21 +37,49 @@
             </InputSelect>
         </div>
     </div>
-       
+    <div class="form-group row">
+        <label class="col-sm-2 col-form-label">部门</label>
+        <div class="col-sm-10 ">
+            <InputSelect id="department" class="form-control" @bind-Value="Employee.Department">
+                @foreach (var department in Departments)
+                {
+                    <option value="@department.Id">@department.Name</option>
+                }
+            </InputSelect>
+        </div>
+    </div>
+
 </EditForm>
 
 @code {
+
     [Parameter]
     public string employeeId { get; set; }
+
+    [Parameter]
+    public string departmentId { get; set; }
+
     [Inject]
     public HttpClient HttpClient { get; set; }
-    public EmployeeDto Employee { get; set; }=new EmployeeDto();
+
+    public EmployeeDto Employee { get; set; } = new EmployeeDto();
+    public DepartmentDto Department { get; set; } = new DepartmentDto();
+    public IEnumerable<DepartmentDto> Departments { get; set; } = new List<DepartmentDto>();
 
 
     protected override async Task OnInitializedAsync()
     {
-        Employee =await HttpClient.GetFromJsonAsync<EmployeeDto>($"api/department/1/employee/{employeeId}");
+        var queryString = $"api/department/{departmentId}/employee/{employeeId}";
+        if (!string.IsNullOrEmpty(employeeId))
+        {
+            Employee = await HttpClient.GetFromJsonAsync<EmployeeDto>(queryString);
+        }
+
+        // Department = await HttpClient.GetFromJsonAsync<DepartmentDto>($"api/department/{departmentId}");
+
+        Departments = await HttpClient.GetFromJsonAsync<IEnumerable<DepartmentDto>>("api/department");
         
+
         await base.OnInitializedAsync();
     }
 

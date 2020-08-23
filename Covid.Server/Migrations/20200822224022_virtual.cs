@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Covid.Server.Migrations
 {
-    public partial class init : Migration
+    public partial class @virtual : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {

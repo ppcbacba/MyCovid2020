@@ -11,5 +11,6 @@ namespace Covid.Server.Services
         Task<Employee> AddAsync(Employee employee);
         Task UpdateAsync(Employee employee);
         Task DeleteAsync(int id);
+        // Task<Department> GetDepartment(int employeeId);
     }
 }

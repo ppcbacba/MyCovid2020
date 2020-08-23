@@ -9,8 +9,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Covid.Server.Migrations
 {
     [DbContext(typeof(MyDbContext))]
-    [Migration("20200821003310_init")]
-    partial class init
+    [Migration("20200822224022_virtual")]
+    partial class @virtual
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {

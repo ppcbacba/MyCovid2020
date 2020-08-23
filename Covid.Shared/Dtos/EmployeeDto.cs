@@ -23,5 +23,7 @@ namespace Covid.Shared.Dtos
 
         [Display(Name = "性别")]
         public Gender Gender { get; set; }
+
+        public DepartmentDto Department { get; set; }
     }
 }

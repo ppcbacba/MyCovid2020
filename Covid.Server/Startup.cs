@@ -34,6 +34,7 @@ namespace Covid.Server
             });
             services.AddControllers();
             services.AddScoped<IEmployeeRepository,EmployeeRepository>();
+            services.AddScoped<IDepartmentRepository,DepartmentRepository>();
             services.AddCors(options =>
             {
                 options.AddPolicy("Open", builder => builder.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod());
